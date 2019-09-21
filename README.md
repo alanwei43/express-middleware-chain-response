@@ -24,6 +24,8 @@ function chainResponse(modulesOrOptions, { debug }){
 
 ### webpack-dev-server
 
+参考例子: [samples/webpack-dev-sever-sample](./samples/webpack-dev-sever-sample)
+
 ```javascript
 const { chainResponse } = require("express-middleware-chain-response");
 
@@ -38,6 +40,8 @@ module.exports = {
 ```
 
 ### Express Web
+
+参考例子: [samples/express-sample](./samples/express-sample)
 
 ```javascript
 const { chainResponse } = require("express-middleware-chain-response");
