@@ -4,16 +4,16 @@ let debugMode = false;
 //#region 日志函数
 function log(txt) {
     if (debugMode) {
-        console.log(`[${new Date().toLocaleString()}] ${txt}`);
+        console.log(`[ChainResponse ${new Date().toLocaleTimeString()}] ${txt}`);
     }
 }
 function warn(txt) {
     if (debugMode) {
-        console.warn(`[${new Date().toLocaleString()}] ${txt}`);
+        console.warn(`[ChainResponse ${new Date().toLocaleTimeString()}] ${txt}`);
     }
 }
 function error(txt, e) {
-    console.error(`[${new Date().toLocaleString()}] ${txt}`, e);
+    console.error(`[ChainResponse ${new Date().toLocaleTimeString()}] ${txt}`, e);
 }
 //#endregion
 
