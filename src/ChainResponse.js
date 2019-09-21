@@ -205,10 +205,9 @@ function chainModules(reqInfo, modules) {
 
 /**
  * 获取 express 中间件
- * @param {{dir: string, filter: RegExp | function} | Array.<{isOpen: boolean, isMatch: function(): Promise<boolean>, getResponse: function(): Promise}>} modulesOrOptions 模块(可以是已经加载好的模块数组, 也可以指定模块路径)
+ * @param {{dir: string, filter: RegExp | function(): boolean} | Array.<{isOpen: boolean, isMatch: function(): Promise<boolean>, getResponse: function(): Promise}>} modulesOrOptions 模块(可以是已经加载好的模块数组, 也可以指定模块路径)
  * @param {{debug: boolean, modules: RegExp}} param1 选项
- * @returns {function}
- }}
+ * @returns {function} express中间件
  */
 function chainResponse(modulesOrOptions, { debug } = {}) {
     debugMode = !!debug;
