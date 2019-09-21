@@ -12,6 +12,6 @@
   "license": "ISC",
   "devDependencies": {
     "express": "^4.17.1",
-    "@alanlib/express-middleware-chain-response": "1.0.0"
+    "@alanlib/express-middleware-chain-response": "1.0.3"
   }
 }
