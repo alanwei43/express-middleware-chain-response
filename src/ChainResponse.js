@@ -1,19 +1,24 @@
 const fs = require("fs"), path = require("path");
-let debugMode = false;
+const chainOptions = {
+    debugMode: false,
+    switchPath: "/@alanlib/express-middleware-chain-response",
+    currentSwitchOn: true,
+    getLogPrefix: () => `[ChainResponse ${new Date().toLocaleTimeString()}]`
+}
 
 //#region 日志函数
 function log(txt) {
-    if (debugMode) {
-        console.log(`[ChainResponse ${new Date().toLocaleTimeString()}] ${txt}`);
+    if (chainOptions.debugMode) {
+        console.log(`${chainOptions.getLogPrefix()} ${txt}`);
     }
 }
 function warn(txt) {
-    if (debugMode) {
-        console.warn(`[ChainResponse ${new Date().toLocaleTimeString()}] ${txt}`);
+    if (chainOptions.debugMode) {
+        console.warn(`${chainOptions.getLogPrefix()} ${txt}`);
     }
 }
 function error(txt, e) {
-    console.error(`[ChainResponse ${new Date().toLocaleTimeString()}] ${txt}`, e);
+    console.error(`${chainOptions.getLogPrefix()} ${txt}`, e);
 }
 //#endregion
 
@@ -206,11 +211,12 @@ function chainModules(reqInfo, modules) {
 /**
  * 获取 express 中间件
  * @param {{dir: string, filter: RegExp | function(): boolean} | Array.<{isOpen: boolean, isMatch: function(): Promise<boolean>, getResponse: function(): Promise}>} modulesOrOptions 模块(可以是已经加载好的模块数组, 也可以指定模块路径)
- * @param {{debug: boolean}} options 选项
+ * @param {{debug: boolean, switchPath: string}} options 选项
  * @returns {function} express中间件
  */
 function chainResponse(modulesOrOptions, options) {
-    debugMode = !!options.debug;
+    chainOptions.debugMode = !!options.debug;
+    chainOptions.switchPath = typeof options.switchPath === "string" ? options.switchPath : chainOptions.switchPath;
 
     const modules = Array.isArray(modulesOrOptions) ? modulesOrOptions : getAllModules(modulesOrOptions.dir, modulesOrOptions.filter);
 
@@ -226,6 +232,16 @@ function chainResponse(modulesOrOptions, options) {
             getHeader: req.get,
             request: req
         };
+        if (chainOptions.switchPath === reqInfo.path) {
+            chainOptions.currentSwitchOn = !chainOptions.currentSwitchOn;
+            res.send(`current switch is ${chainOptions.currentSwitchOn}`);
+            return;
+        }
+        if (!chainOptions.currentSwitchOn) {
+            log("middleware is off, go to next.");
+            next();
+            return;
+        }
 
         const logPrefix = `[${reqInfo.method.toUpperCase()} ${reqInfo.path}]`;
         const matchPromises = modules.map(m => {
