@@ -2,6 +2,12 @@
 
 主要用于 webpack-dev-server mock接口使用.
 
+## 安装
+
+```bash
+npm install @alanlib/express-middleware-chain-response
+```
+
 ## 使用方式
 
 函数定义

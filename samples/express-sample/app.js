@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const { chainResponse } = require("../../src/ChainResponse");
+const { chainResponse } = require("@alanlib/express-middleware-chain-response");
 const path = require("path");
 
 app.get('/', (req, res) => res.send('Hello World!'))
