@@ -42,4 +42,4 @@ function getJsonpModule(callbackParams, priority = 5) {
     };
 }
 
-exports.getJsonpModule = getJsonpModule;
+module.exports = getJsonpModule;

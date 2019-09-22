@@ -1,2 +1,5 @@
-const { getJsonpModule } = require("./jsonap");
-exports.getJsonpModule = getJsonpModule ;
+const getJsonpModule = require("./jsonap"),
+    getLocalFileMapModule = require("./local-file-map");
+
+exports.getJsonpModule = getJsonpModule;
+exports.getLocalFileMapModule = getLocalFileMapModule;
