@@ -15,18 +15,15 @@ npm install @alanlib/express-middleware-chain-response
 ```javascript
 /**
  * 获取 express 中间件
- * @param {{dir: string, filter: RegExp | function(): boolean} | Array.<{isOpen: boolean, isMatch: function(): Promise<boolean> getResponse: function(): Promise}>} modulesOrOptions 模块(可以是已经加载好的模块数组, 也可以指定模块路径)
+ * @param {Array.<string | {isOpen: boolean, isMatch: function(): Promise<boolean> getResponse: function(): Promise}>} modules 模块(可以是已经加载好的模块数组, 也可以是模块文件所在目录, 或者模块的文件路径)
  * @param {{debug: boolean, switchPath: string}} options 选项
  * @returns {function} express中间件
  */
-function chainResponse(modulesOrOptions, options){
+function chainResponse(modules, options){
     //...
 }
 ```
 
-* modulesOrOptions: Array | {}
-    * dir: `string` 模块所在目录
-    * filter: `RegExp | function` 模块文件筛选
 * options: 
     * debug: `boolean` 开启会输出更多log日志
     * switchPath: `string` 用来开启/关闭此中间件的拦截功能, 默认 `/@alanlib/express-middleware-chain-response`
