@@ -1,4 +1,4 @@
-const { chainResponse } = require("../../src/ChainResponse");
+const { chainResponse } = require("../../src");
 const path = require("path");
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
     },
     devServer: {
         before: function (app, server) {
-            app.use(chainResponse({ dir: path.join(__dirname, "chain-response", "modules") }, { debug: true }));
+            app.use(chainResponse([path.join(__dirname, "chain-response", "modules")], { debug: true }));
         }
     }
 };

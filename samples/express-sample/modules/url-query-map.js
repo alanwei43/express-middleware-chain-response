@@ -1,6 +1,6 @@
 const Path = require("path"),
     Fs = require("fs"),
-    { recuriseFiles } = require("../../../src/ChainResponse");
+    { recuriseFiles } = require("../../../src");
 
 const extTypeMaps = {
     ".json": "application/json",

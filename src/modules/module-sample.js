@@ -38,19 +38,16 @@ const chainModule = {
      */
     getResponse({ method, originalUrl, path, query, xhr, request }, matchResult, prevResponse, handledModules) {
         // 返回对象必须包含 content 和 headers 
-        return {
+        const result = {
             content: "",
             headers: {
                 // "Content-Type": "application/json"
-            }
+            },
+            continueNext: false
         };
+        return result;
         // 也可以返回一个Promise
-        return Promise.resolve({
-            content: "",
-            headers: {
-                // "Content-Type": "application/json"
-            }
-        });
+        return Promise.resolve(result);
     }
 };
 
