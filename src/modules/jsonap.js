@@ -6,7 +6,7 @@
 function getJsonpModule(callbackParams, priority = 5) {
 
     return {
-        isOpen: false, //是否开启
+        isOpen: true, //是否开启
         priority: priority, //优先级, 默认100, 值越高越先执行
         name: "jsonp", //模块名称(方便调试)
 

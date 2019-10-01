@@ -59,7 +59,7 @@ function chainResponse(modules, options) {
         })
         .reduce((prev, next) => prev.concat(next), [])
         .map(m => checkChainModule(m))
-        .filter(item => item.isValid)
+        .filter(item => item.isValid && item.chainModule.isOpen)
         .map(item => item.chainModule);
 
     log(`加载了${validModules.length}个模块: ${validModules.map(m => m.name).join(", ")}`);
