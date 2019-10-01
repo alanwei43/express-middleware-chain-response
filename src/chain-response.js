@@ -116,7 +116,7 @@ function chainResponse(modules, options) {
             Object.keys(prevResponse.headers || {}).forEach(key => {
                 const value = prevResponse.headers[key];
                 res.append(key, value);
-                log(`${logPrefix}设置响应头 ${key}: value`);
+                log(`${logPrefix}设置响应头 ${key}: ${value}`);
             });
             if (prevResponse.content) {
                 res.send(prevResponse.content);
