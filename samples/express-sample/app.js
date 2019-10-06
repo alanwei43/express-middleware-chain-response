@@ -9,6 +9,6 @@ app.use(chainResponse([
     path.join(__dirname, "modules"),
     getJsonpModule(["_callback"]),
     getLocalFileMapModule(path.join(__dirname, "mock-files"), params => params.path.replace(/\//g, "_"))
-], { debug: true }));
+], { debug: true, currentSwitchOn: true }));
 
-app.listen(3001, () => console.log('Example app listening on port 3001!'))
+app.listen(3001, () => console.log("access http://localhost:3001/index"))

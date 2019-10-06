@@ -32,7 +32,7 @@ function getAllModules(dir) {
 /**
  * 获取 express 中间件
  * @param {Array.<string | Object>} modulesOrOptions 模块(可以是已经加载好的模块数组, 也可以指定模块路径)
- * @param {{debug: boolean, switchPath: string}} options 选项
+ * @param {{debug: boolean, switchPath: string, currentSwitchOn: boolean}} options 选项
  * @returns {function} express中间件
  */
 function chainResponse(modules, options) {
@@ -40,8 +40,8 @@ function chainResponse(modules, options) {
         warn("参数 modules 必须是数组");
         return;
     }
-    chainOptions.debugMode = !!options.debug;
-    chainOptions.switchPath = typeof options.switchPath === "string" ? options.switchPath : chainOptions.switchPath;
+    
+    chainOptions.update(options);
 
     const validModules = modules.filter(m => m && (typeof m === "string" && fs.existsSync(m)) || typeof m === "object" || typeof m === "function")
         .map(m => {
