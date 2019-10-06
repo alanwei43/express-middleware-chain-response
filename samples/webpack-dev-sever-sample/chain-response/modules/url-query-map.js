@@ -1,4 +1,4 @@
-const Path = require("path"), Fs = require("fs"), { recuriseFiles } = require("../../../../src/ChainResponse");
+const Path = require("path"), Fs = require("fs"), { recuriseFiles } = require("../../../../src/util");
 
 const extTypeMaps = {
     ".json": "application/json",
