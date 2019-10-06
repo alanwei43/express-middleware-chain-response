@@ -16,7 +16,7 @@ npm install @alanlib/express-middleware-chain-response
 /**
  * 获取 express 中间件
  * @param {Array.<string | {isOpen: boolean, isMatch: function(): Promise<boolean> getResponse: function(): Promise}>} modules 模块(可以是已经加载好的模块数组, 也可以是模块文件所在目录, 或者模块的文件路径)
- * @param {{debug: boolean, switchPath: string}} options 选项
+ * @param {{debug: boolean, switchPath: string, currentSwitchOn: boolean}} options 选项
  * @returns {function} express中间件
  */
 function chainResponse(modules, options){
@@ -27,10 +27,13 @@ function chainResponse(modules, options){
 * options: 
     * debug: `boolean` 开启会输出更多log日志
     * switchPath: `string` 用来开启/关闭此中间件的拦截功能, 默认 `/@alanlib/express-middleware-chain-response`
+    * currentSwitchOn: `boolean` 默认开启/关闭拦截功能
 
-可以指定模块所在目录: `chainResponse({dir: "../modules" })`
+可以指定模块所在目录: `chainResponse(["../modules"])`, 或模块文件: `chainResponse(["../modules/jsonp-module.js"])`
 
 也可以直接传入模块: `chainResponse([require("./module1"), require("./module2")])`
+
+或者混合使用: `chainResponse(["../modules-dir", "./module1.js", require("./module1"), require("./module2")])`
 
 ### webpack-dev-server
 
@@ -43,7 +46,7 @@ module.exports = {
     //other configurations
     devServer: {
         before: function (app, server) {
-            app.use(chainResponse({ dir: path.join(__dirname, "modules") }, { debug: true }));
+            app.use(chainResponse([path.join(__dirname, "modules")], { debug: true }));
         }
     }
 };
@@ -55,10 +58,12 @@ module.exports = {
 
 ```javascript
 const { chainResponse } = require("express-middleware-chain-response");
-app.use(chainResponse({ dir: path.join(__dirname, "modules") }, { debug: true }));
+app.use(chainResponse([path.join(__dirname, "modules")], { debug: true }));
 ```
 
 ## 模块定义
+
+[例子如下](./src/modules/module-sample.js):
 
 ```javascript
 /**
